@@ -4,23 +4,23 @@ const numbersInHTML = document.getElementById('number-display');
 
 const maxNumbers = 5;
 
-const disappearTimeout = 2;
+const disappearTimeout = 30;
 const numbersToGuess = [];
 
 /* Necessito di:
     DONE    funzione randomNumber
     DONE    ciclo che mi crea i div.numbers con relativo numero casuale
     DONE    funzione temporale per eliminare i numeri
-    prompt per chiedere numeri in ingresso
-    confronto numeri dopo averli identificati
-    messaggio di vittoria/sconfitta
+    DONE    prompt per chiedere numeri in ingresso
+    DONE    confronto numeri dopo averli identificati
+    DONE    messaggio di vittoria/sconfitta
 */
 
 for (let i = 0; i < maxNumbers; i++) {
     const numberInside = randomNumberTo50();
     numbersToGuess[i] = numberInside;
     console.log(numberInside);
-    numbersInHTML.innerHTML += `<div class="numbers">${numberInside}</div>`;
+    numbersInHTML.innerHTML += `<div class="numbers to-guess">${numberInside}</div>`;
 }
 
 setTimeout(function () {
@@ -69,21 +69,41 @@ function askToUser(maxRequest) {
 function numbersCheck(array1, array2, HTMLShower) {
 
     let rightGuessed = 0;
+    const displayArray = []
 
     // Controllo numeri
     for (let i = 0; i < array1.length; i++) {
         console.log(i, array1[i])
-        array2.includes(array1[i]) ? rightGuessed++ : console.log('Nisba');
+
+        if (array2.includes(array1[i])) {
+            rightGuessed++;
+            // Inseriamo in un array a parte i numeri corretti
+            displayArray.push(array1[i]);
+            console.log('Giusto!')
+        } else {
+            console.log('Sbagliato!')
+        }
+
     }
+
+    console.log('Array display: ', displayArray)
 
     // Messaggio per i numeri trovati
 
     if (rightGuessed > 0) {
-        // Messaggio diversi se sono tutti esatti
-        rightGuessed === array1.length ? HTMLShower.innerHTML = `<div class="numbers">Tutti i numeri indovinati. Che memoria!</div>`
-            : HTMLShower.innerHTML = `<div class="numbers">Hai indovinato ${rightGuessed} numeri! Complimenti!</div>`;
+
+        // Messaggio diverso se sono tutti esatti
+        if (rightGuessed === array1.length) {
+            HTMLShower.innerHTML = `<div class="numbers">Tutti i numeri indovinati. Che memoria!</div>`
+            HTMLShower.innerHTML += `<div class="numbers">I numeri erano: ${array1.join(' - ')}</div>`
+        } else {
+            HTMLShower.innerHTML = `<div class="numbers">Hai indovinato ${rightGuessed} numeri! Complimenti!</div>`;
+            HTMLShower.innerHTML += `<div class="numbers">I numeri indovinati sono: ${displayArray.join(' - ')}</div>`;
+        }
+
     } else {
         HTMLShower.innerHTML = `<div class="numbers">Nessun numero indovinato. Provaci ancora!</div>`
+        HTMLShower.innerHTML += `<div class="numbers">I numeri esatti erano: ${array1.join(' - ')}</div>`
     }
 
 }

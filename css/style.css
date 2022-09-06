@@ -14,6 +14,12 @@
     font-weight: 600;
 }
 
+.numbers.to-guess {
+    background-color: red;
+    color: white;
+    border-radius: 20px;
+}
+
 /* DEBUGGER */
 .debug {
     background-color: grey;
