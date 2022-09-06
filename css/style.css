@@ -1,0 +1,15 @@
+/* DEBUGGER */
+.debug {
+    background-color: grey;
+}
+
+.debug #number-display {
+    min-height: 200px;
+    background-color: darkcyan;
+}
+
+.debug .numbers {
+    min-width: 50px;
+    min-height: 50px;
+    background-color: coral;
+}
