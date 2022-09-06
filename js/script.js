@@ -1,7 +1,7 @@
 console.log('JS OK');
 
 const numbersInHTML = document.getElementById('number-display');
-console.log(numbersInHTML.innerHTML);
+
 const maxNumbers = 5;
 
 const disappearTimeout = 2;
@@ -25,8 +25,10 @@ for (let i = 0; i < maxNumbers; i++) {
 
 setTimeout(function () {
     clearHTMLElement(numbersInHTML);
-    userNumbers = askToUser(maxNumbers);
-    numbersCheck(numbersToGuess, userNumbers, numbersInHTML);
+    setTimeout(function () {
+        userNumbers = askToUser(maxNumbers);
+        numbersCheck(numbersToGuess, userNumbers, numbersInHTML);
+    }, 100)
 }, disappearTimeout * 1000);
 
 
