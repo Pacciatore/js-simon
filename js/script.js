@@ -5,7 +5,7 @@ const numbersInHTML = document.getElementById('number-display');
 const maxNumbers = 5;
 
 const disappearTimeout = 30;
-const numbersToGuess = [];
+let numbersToGuess = [];
 
 /* Necessito di:
     DONE    funzione randomNumber
@@ -17,10 +17,9 @@ const numbersToGuess = [];
 */
 
 for (let i = 0; i < maxNumbers; i++) {
-    const numberInside = randomNumberTo50();
-    numbersToGuess[i] = numberInside;
-    console.log(numberInside);
-    numbersInHTML.innerHTML += `<div class="numbers to-guess">${numberInside}</div>`;
+    numbersToGuess = randomUniqueNumberTo50(maxNumbers);
+    console.log(numbersToGuess[i]);
+    numbersInHTML.innerHTML += `<div class="numbers to-guess">${numbersToGuess[i]}</div>`;
 }
 
 setTimeout(function () {
@@ -36,6 +35,23 @@ function randomNumberTo50() {
     const num = Math.floor(Math.random() * 50) + 1;
     console.log('numero casuale da 1 a 50: ' + num);
     return num;
+}
+
+
+function randomUniqueNumberTo50(maxLength) {
+    const nums = [];
+
+    for (let i = 0; i < maxLength; i++) {
+
+        const num = Math.floor(Math.random() * 50) + 1;
+        if (!nums.includes(num)) {
+            nums.push(num)
+        }
+
+    }
+
+    return nums;
+
 }
 
 
