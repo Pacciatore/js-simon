@@ -25,7 +25,8 @@ for (let i = 0; i < maxNumbers; i++) {
 
 setTimeout(function () {
     clearHTMLElement(numbersInHTML);
-    askToUser();
+    userNumbers = askToUser(maxNumbers);
+    numbersCheck(numbersToGuess, userNumbers, numbersInHTML);
 }, disappearTimeout * 1000);
 
 
@@ -37,13 +38,50 @@ function randomNumberTo50() {
 
 
 function clearHTMLElement(element) {
-    console.log(element);
     element.innerHTML = '';
-    console.log(numbersToGuess);
 }
 
 
-function askToUser() {
-    const userNumber = prompt('Inserire numero:');
-    console.log(userNumber)
+function askToUser(maxRequest) {
+
+    const userNumbers = [];
+
+    for (let i = 0; i < maxRequest; i++) {
+        do {
+            // Inserimento numero
+            userNumbers[i] = parseInt(prompt('Inserire numero:'));
+
+            // Messaggio di errore
+            isNaN(userNumbers[i]) ? alert('Non hai inserito un numero, riprova.') : '';
+
+        } while (isNaN(userNumbers[i]));
+
+        console.log(i, userNumbers[i]);
+    }
+
+    return userNumbers;
+
+}
+
+
+function numbersCheck(array1, array2, HTMLShower) {
+
+    let rightGuessed = 0;
+
+    // Controllo numeri
+    for (let i = 0; i < array1.length; i++) {
+        console.log(i, array1[i])
+        array2.includes(array1[i]) ? rightGuessed++ : console.log('Nisba');
+    }
+
+    // Messaggio per i numeri trovati
+
+    if (rightGuessed > 0) {
+        // Messaggio diversi se sono tutti esatti
+        rightGuessed === array1.length ? HTMLShower.innerHTML = `<div class="numbers">Tutti i numeri indovinati. Che memoria!</div>`
+            : HTMLShower.innerHTML = `<div class="numbers">Hai indovinato ${rightGuessed} numeri! Complimenti!</div>`;
+    } else {
+        HTMLShower.innerHTML = `<div class="numbers">Nessun numero indovinato. Provaci ancora!</div>`
+    }
+
 }

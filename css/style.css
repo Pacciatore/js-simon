@@ -1,6 +1,13 @@
 /* CONTENT */
 
+#number-display {
+    min-height: 200px;
+}
+
 .numbers {
+    min-width: 50px;
+    min-height: 50px;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,7 +25,5 @@
 }
 
 .debug .numbers {
-    min-width: 50px;
-    min-height: 50px;
     background-color: coral;
 }
