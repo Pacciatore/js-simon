@@ -4,7 +4,7 @@ const numbersInHTML = document.getElementById('number-display');
 
 const maxNumbers = 5;
 
-const disappearTimeout = 30;
+const disappearTimeout = 2;
 let numbersToGuess = [];
 
 /* Necessito di:
@@ -40,12 +40,15 @@ function randomNumberTo50() {
 
 function randomUniqueNumberTo50(maxLength) {
     const nums = [];
+    let i = 0;
 
-    for (let i = 0; i < maxLength; i++) {
-
+    // Uso del while per poter evitare il valore undefined
+    while (i < maxLength) {
         const num = Math.floor(Math.random() * 50) + 1;
+
         if (!nums.includes(num)) {
             nums.push(num)
+            i++;
         }
 
     }
@@ -114,7 +117,7 @@ function numbersCheck(array1, array2, HTMLShower) {
             HTMLShower.innerHTML += `<div class="numbers">I numeri erano: ${array1.join(' - ')}</div>`
         } else {
             HTMLShower.innerHTML = `<div class="numbers">Hai indovinato ${rightGuessed} numeri! Complimenti!</div>`;
-            HTMLShower.innerHTML += `<div class="numbers">I numeri indovinati sono: ${displayArray.join(' - ')}</div>`;
+            HTMLShower.innerHTML += `<div class="numbers">I numeri indovinati sono: ${displayArray.join(' - ')} | Mentre quelli esatti erano: ${array1.join(' - ')}</div>`;
         }
 
     } else {
