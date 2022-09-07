@@ -15,13 +15,12 @@ let numbersToGuess = [];
     DONE    confronto numeri dopo averli identificati
     DONE    messaggio di vittoria/sconfitta
 */
+numbersToGuess = randomUniqueNumberTo50(maxNumbers);
 
 for (let i = 0; i < maxNumbers; i++) {
-    numbersToGuess = randomUniqueNumberTo50(maxNumbers);
     console.log(numbersToGuess[i]);
     numbersInHTML.innerHTML += `<div class="numbers to-guess">${numbersToGuess[i]}</div>`;
 }
-
 setTimeout(function () {
     clearHTMLElement(numbersInHTML);
     setTimeout(function () {
